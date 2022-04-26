@@ -12,7 +12,7 @@
 <body>
 
 	<div class="wrapper">
-		<form action="/member/join/" method="post">
+		<form id="join_form" method="post">
 			<div class="wrap">
 				<div class="subject">
 					<span>회원가입</span>
@@ -90,7 +90,7 @@
 					</div>
 				</div>
 				<div class="join_button_wrap">
-					<input type="submit" class="join_button" value="가입하기">
+					<input type="button" class="join_button" value="가입하기">
 				</div>
 			</div>
 		</form>
@@ -114,7 +114,7 @@ var addressCheck = false         // 주소
 
 //회원가입 유효성 검사
 $(document).ready(function(){
-	$("join_button").click(function(){
+	$(".join_button").click(function(){
 		/* 입력값 변수 */
         var id = $('.id_input').val();                 // id 입력란
         var pw = $('.pw_input').val();                // 비밀번호 입력란
@@ -177,6 +177,15 @@ $(document).ready(function(){
             addressCheck = true;
         }
         
+        /* 최종 유효성 검사 */
+        if(idCheck&&idckCheck&&pwCheck&&pwckCheck&&pwckcorCheck&&nameCheck&&mailCheck&&mailnumCheck&&addressCheck ){
+ 
+        	$("#join_form").attr("action", "/member/join");
+            $("#join_form").submit();
+        	
+        }
+        
+        return false;
 	});
 });
 
