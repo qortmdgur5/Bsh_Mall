@@ -58,6 +58,7 @@
 	                    			</div>
 	                    			<div class="form_section_content">
 	                    				<input name="authorName">
+	                    				<span id="warn_authorName">작가 이름을 입력 해주세요.</span>
 	                    			</div>
 	                    		</div>
 	                    		<div class="form_section">
@@ -70,6 +71,7 @@
 	                    					<option value="01">국내</option>
 	                    					<option value="02">국외</option>
 	                    				</select>
+	                    				<span id="warn_nationId">소속 국가를 선택해주세요.</span>
 	                    			</div>
 	                    		</div>
 	                    		<div class="form_section">
@@ -78,6 +80,7 @@
 	                    			</div>
 	                    			<div class="form_section_content">
 	                    				<input name="authorIntro" type="text">
+	                    				<span id="warn_authorIntro">작가 소개를 입력 해주세요.</span>
 	                    			</div>
 	                    		</div>
 	                    	</form>
@@ -113,7 +116,7 @@
             <div class="footer_container">
                 
                 <div class="footer_left">
-                    <img src="../resources/img/Logo.png">
+                    <img src="../resources/img/mLogo.png">
                 </div>
                 <div class="footer_right">
                     (주) VamBook    대표이사 : OOO
@@ -137,14 +140,62 @@
  
 /* 등록 버튼 */
 $("#enrollBtn").click(function(){    
-    $("#enrollForm").submit();
+    /* 검사 통과 유무 변수 */
+    let nameCheck = false;            // 작가 이름
+    let nationCheck = false;        // 소속 국가
+    let introCheck = false;            // 작가 소개    
+ 
+    /* 입력값 변수 */
+    let authorName = $('input[name=authorName]').val();        // 작가 이름
+    let nationId = $('select[name=nationId]').val();        // 소속 국가
+    let authorIntro = $('input[name=authorIntro]').val();    // 작가 소개
+    /* 공란 경고 span태그 */
+    let wAuthorName = $('#warn_authorName');
+    let wNationId = $('#warn_nationId');
+    let wAuthorIntro = $('#warn_authorIntro');    
+    
+    /* 작기 이름 공란 체크 */
+    if(authorName ===''){
+        wAuthorName.css('display', 'block');
+        nameCheck = false;
+    } else{
+        wAuthorName.css('display', 'none');
+        nameCheck = true;
+    }
+    
+    /* 소속 국가 공란 체크 */
+    if(nationId ==='none'){
+        wNationId.css('display', 'block');
+        nationCheck = false;
+    } else{
+        wNationId.css('display', 'none');
+        nationCheck = true;
+    }    
+    
+    /* 작가 소개 공란 체크 */
+    if(authorIntro ===''){
+        wAuthorIntro.css('display', 'block');
+        introCheck = false;
+    } else{
+        wAuthorIntro.css('display', 'none');
+        introCheck = true;
+    }    
+    
+    /* 최종 검사 */
+    if(nameCheck && nationCheck && introCheck){
+        $("#enrollForm").submit();    
+    } else{
+        return;
+    }
+    
 });
  
 /* 취소 버튼 */
 $("#cancelBtn").click(function(){
     location.href="/admin/authorManage"
 });
-
+</script>
+<script>
 /* 작가등록 성공 메시지*/
 $(document).ready(function(){
     
@@ -152,12 +203,13 @@ $(document).ready(function(){
 	function checkResult(result){
 		if(result === '') {
 			return;
-		}
+		} else {
 		alert("작가'${enroll_result}' 을 등록하였습니다.");
+		}
 	}
 	 
 });
- 
 </script>
+
 
 </html>
