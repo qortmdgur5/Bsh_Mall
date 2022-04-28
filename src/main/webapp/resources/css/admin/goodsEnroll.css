@@ -162,6 +162,11 @@ ul{
 #enrollBtn:hover {
     background-color: #c9cbd0;
 }
+
+/* ckeditor 높이 */
+.ck-content {						
+    height: 170px;
+}
  
 /* footer navai 영역 */
 .footer_nav{

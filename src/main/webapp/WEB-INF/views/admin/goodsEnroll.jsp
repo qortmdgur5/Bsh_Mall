@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="../resources/css/admin/goodsEnroll.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
 </head>
 <body>
 
@@ -84,7 +85,7 @@
                     				<label>책 소개</label>
                     			</div>
                     			<div class="form_section_content">
-                    				<input name="bookIntro">
+                    				<textarea name="bookIntro" id="bookIntro_textarea"></textarea>
                     			</div>
                     		</div>        		
                     		<div class="form_section">
@@ -92,7 +93,7 @@
                     				<label>책 목차</label>
                     			</div>
                     			<div class="form_section_content">
-                    				<input name="bookContents">
+                    				<textarea name="bookContents" id="bookContents_textarea"></textarea>
                     			</div>
                     		</div>
                    		</form>
@@ -122,6 +123,22 @@
 		
 		enrollForm.submit();
 		
+	});
+	
+	
+	/* 위지윅 적용 */
+	/* 책 소개 */
+	ClassicEditor
+		.create(document.querySelector('#bookIntro_textarea'))
+		.catch(error=>{
+			console.error(error);
+		});
+		
+	/* 책 목차 */	
+	ClassicEditor
+	.create(document.querySelector('#bookContents_textarea'))
+	.catch(error=>{
+		console.error(error);
 	});
 
 </script> 
