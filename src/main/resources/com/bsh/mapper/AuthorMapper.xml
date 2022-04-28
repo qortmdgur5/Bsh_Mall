@@ -9,5 +9,28 @@
           insert into bsh_author(authorId, authorName, nationId, authorIntro) values(se_authorId.nextval, #{authorName}, #{nationId}, #{authorIntro} )
       </insert>
       
-      
+	<!--  작가 목록 -->
+	<select id="authorGetList" resultType="com.bsh.model.AuthorVO">
+		<![CDATA[
+			select * from (
+				select /*+INDEX_DESC(bsh_author SYS_C007640) */
+					rownum as rn, authorId, authorName, nationId, regDate, updateDate
+						from bsh_author )
+						where (
+		]]>
+			<if test="keyword != null">
+	                authorName like '%'||#{keyword}||'%' and
+	        </if>
+	    <![CDATA[        
+	            rn between (#{pageNum} - 1) * #{amount} and #{pageNum}*#{amount} - 1 ) 
+	    ]]>
+	</select>
+	
+	<!-- 작가 수 -->
+      <select id="authorGetTotal" resultType="int">
+          select count(*) from bsh_author
+          <if test="keyword != null">
+             where authorName like '%' || #{keyword} || '%'
+          </if>
+      </select> 
 </mapper>
