@@ -38,4 +38,15 @@
   	<select id="authorGetDetail" resultType="com.bsh.model.AuthorVO">
   		select * from bsh_author where authorId = #{authorId}
   	</select>
+  	
+  	<!-- 작가 정보 수정 -->
+  	<update id="authorModify">
+  		update bsh_author set authorName=#{authorName}, nationId=#{nationId}, authorIntro=#{authorIntro}, updateDate=sysdate where authorId = #{authorId}
+  	</update>
+  	
+  	
+  	
+  	
+  	
+  	
 </mapper>

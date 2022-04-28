@@ -32,10 +32,17 @@ public class AuthorServiceImpl implements AuthorService{
 	public int authorGetTotal(Criteria cri) throws Exception {
 		return authorMapper.authorGetTotal(cri);
 	}
-
+	
+	//작가 상세 페이지
 	@Override
 	public AuthorVO authorGetDetail(int authorId) throws Exception {
 		return authorMapper.authorGetDetail(authorId);
+	}
+
+	//작가 정보 수정
+	@Override
+	public int authorModify(AuthorVO author) throws Exception {
+		return authorMapper.authorModify(author);
 	}
 
 }
