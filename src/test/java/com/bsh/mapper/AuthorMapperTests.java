@@ -27,17 +27,26 @@ public class AuthorMapperTests {
 	 * 
 	 * mapper.authorEnroll(author); }
 	 */
+	/*
+	 * //작가 목록 테스트
+	 * 
+	 * @Test public void authorGetListTest() throws Exception { Criteria cri = new
+	 * Criteria(3,10); //3페이지 10개 표시 cri.setKeyword("asd"); List<AuthorVO> list =
+	 * mapper.authorGetList(cri);
+	 * 
+	 * for(int i = 0; i < list.size(); i++) { System.out.println(list.get(i)); } }
+	 */
 	
-	//작가 목록 테스트
+	/* 작가 상세 페이지 */
 	@Test
-	public void authorGetListTest() throws Exception {
-		Criteria cri = new Criteria(3,10);	//3페이지 10개 표시
-		cri.setKeyword("asd");
-		List<AuthorVO> list = mapper.authorGetList(cri);
+	public void authorGetDetailTest() {
 		
-		for(int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i));
-		}
+		int authorId = 680;
+		
+		AuthorVO author = mapper.authorGetDetail(authorId);
+		
+		System.out.println("author......." + author);
+		
 	}
 
 }
