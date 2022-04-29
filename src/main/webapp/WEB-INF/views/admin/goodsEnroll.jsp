@@ -6,8 +6,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../resources/css/admin/goodsEnroll.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 </head>
 <body>
 
@@ -29,7 +32,9 @@
                     				<label>작가</label>
                     			</div>
                     			<div class="form_section_content">
-                    				<input name="authorId" value="0">
+                    				<input id="authorName_input" readonly="readonly">
+									<input id="authorId_input" name="authorId" type="hidden">
+									<button class="authorId_btn">작가 선택</button>
                     			</div>
                     		</div>            
                     		<div class="form_section">
@@ -37,7 +42,7 @@
                     				<label>출판일</label>
                     			</div>
                     			<div class="form_section_content">
-                    				<input name="publeYear">
+                    				<input name="publeYear" autocomplete="off" readonly="readonly">
                     			</div>
                     		</div>            
                     		<div class="form_section">
@@ -139,6 +144,40 @@
 	.create(document.querySelector('#bookContents_textarea'))
 	.catch(error=>{
 		console.error(error);
+	});
+	
+	/* 출판일 선택 캘릭더 적용 */
+	/* 캘린더 설정 */
+	const config = {
+		dateFormat: 'yy-mm-dd',
+		showOn : "button",
+		buttonText:"날짜 선택",
+		prevText: '이전 달',
+	    nextText: '다음 달',
+	    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    dayNames: ['일','월','화','수','목','금','토'],
+	    dayNamesShort: ['일','월','화','수','목','금','토'],
+	    dayNamesMin: ['일','월','화','수','목','금','토'],
+	    yearSuffix: '년',
+	    changeMonth: true,
+        changeYear: true
+	}
+
+	$(function() {
+		  $( "input[name='publeYear']" ).datepicker(config);
+		});
+	
+	/* 작가 선택 버튼 */
+	$('.authorId_btn').on("click",function(e){
+		
+		e.preventDefault();
+		
+		let popUrl = "/admin/authorPop";
+		let popOption = "width = 650px, height=550px, top=300px, left=300px, scrollbars=yes";
+		
+		window.open(popUrl,"작가 찾기",popOption);
+		
 	});
 
 </script> 
