@@ -6,7 +6,7 @@
   
   	<!-- 작가 등록 -->
       <insert id="authorEnroll">
-          insert into bsh_author(authorId, authorName, nationId, authorIntro) values(se_authorId.nextval, #{authorName}, #{nationId}, #{authorIntro} )
+          insert into bsh_author(authorName, nationId, authorIntro) values(#{authorName}, #{nationId}, #{authorIntro} )
       </insert>
       
 	<!--  작가 목록 -->
